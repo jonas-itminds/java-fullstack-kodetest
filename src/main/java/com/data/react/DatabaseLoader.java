@@ -31,30 +31,30 @@ public class DatabaseLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        Customer theCustomer = new Customer("Torol", "Sadeas", "dead");
+        Customer theCustomer = new Customer("Warren", "Buffet", "Age: 93");
 
-        Account torolsCheckingAccount = new Account("Torol's Checking", 300.0, theCustomer);
-        Account torolsSavingsAccount = new Account("Torol's savings", 500.0, theCustomer);
+        Account warrensCheckingAccount = new Account("Warren's Checking", 300.0, theCustomer);
+        Account warrensSavingsAccount = new Account("Warren's savings", 500.0, theCustomer);
 
-        Transaction checkingTransactionFive = new Transaction(new Date(1105789200000L), "On the five", 100.0, true, torolsCheckingAccount);
-        Transaction checkingTransactionSix = new Transaction(new Date(1149544800000L), "Removed six", 6.0, false, torolsCheckingAccount);
+        Transaction checkingTransactionFive = new Transaction(new Date(1105789200000L), "Deposit on the fifth", 100.0, true, warrensCheckingAccount);
+        Transaction checkingTransactionSix = new Transaction(new Date(1149544800000L), "Removed six on the sixth", 6.0, false, warrensCheckingAccount);
 
-        Transaction savingsTransactionThree = new Transaction(new Date(1046646000000L), "Three", 33.0, true, torolsSavingsAccount);
-        Transaction savingsTransactionTwo = new Transaction(new Date(1018374800000L), "Two in the pot", 6.0, true, torolsSavingsAccount);
+        Transaction savingsTransactionThree = new Transaction(new Date(1046646000000L), "Saving 33", 33.0, true, warrensSavingsAccount);
+        Transaction savingsTransactionTwo = new Transaction(new Date(1018374800000L), "Saved 6", 6.0, true, warrensSavingsAccount);
 
-        torolsCheckingAccount.setTransactions(new ArrayList<>(Arrays.asList((checkingTransactionFive), (checkingTransactionSix))));
-        torolsSavingsAccount.setTransactions(new ArrayList<>(Arrays.asList((savingsTransactionThree), (savingsTransactionTwo))));
+        warrensCheckingAccount.setTransactions(new ArrayList<>(Arrays.asList((checkingTransactionFive), (checkingTransactionSix))));
+        warrensSavingsAccount.setTransactions(new ArrayList<>(Arrays.asList((savingsTransactionThree), (savingsTransactionTwo))));
 
-        theCustomer.setAccounts(new ArrayList<>(Arrays.asList((torolsCheckingAccount), (torolsSavingsAccount))));
+        theCustomer.setAccounts(new ArrayList<>(Arrays.asList((warrensCheckingAccount), (warrensSavingsAccount))));
 
         this.customerRepository.save(theCustomer);
 
-        Account testerAccount = new Account("Third Account", 123.0);
+        Account testerAccount = new Account("Warren's Third Account", 123.0);
         testerAccount.setCustomer(customerRepository.findById(1L));
         this.accountRepository.save(testerAccount);
 
-        this.accountRepository.save(torolsSavingsAccount);
-        this.accountRepository.save(torolsCheckingAccount);
+        this.accountRepository.save(warrensSavingsAccount);
+        this.accountRepository.save(warrensCheckingAccount);
 
         this.transactionRepository.save(checkingTransactionFive);
         this.transactionRepository.save(checkingTransactionSix);
@@ -87,7 +87,7 @@ public class DatabaseLoader implements CommandLineRunner {
         transactions.forEach(System.out::println);
         System.out.println("-----");
 
-        transactions = transactionRepository.findAllByAccountId(torolsCheckingAccount.getId());
+        transactions = transactionRepository.findAllByAccountId(warrensCheckingAccount.getId());
         transactions.forEach(System.out::println);
         System.out.println("-----");
 */
